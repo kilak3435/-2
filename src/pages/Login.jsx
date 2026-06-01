@@ -25,10 +25,7 @@ export default function Login() {
             <Lock className="text-[var(--color-incognito-accent)]" size={24} />
           </div>
         </div>
-        <h2 className="text-2xl font-bold text-center text-white mb-2">Вход в портал</h2>
-        <p className="text-center text-[var(--color-incognito-text-muted)] mb-8 text-sm">
-          Используйте admin / 123 или user / 123
-        </p>
+        <h2 className="text-2xl font-bold text-center text-white mb-8">Вход в портал</h2>
 
         {error && (
           <div className="mb-4 p-3 bg-red-900/30 border border-red-500/50 rounded text-red-200 text-sm text-center">
