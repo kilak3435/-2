@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  
+  /* Chrome Incognito Dark Theme Colors */
+  --color-incognito-bg: #202124;
+  --color-incognito-surface: #323639;
+  --color-incognito-surface-hover: #3c4043;
+  --color-incognito-text: #f1f3f4;
+  --color-incognito-text-muted: #9aa0a6;
+  --color-incognito-border: #5f6368;
+  --color-incognito-accent: #8ab4f8;
+  --color-incognito-accent-hover: #aecbfa;
+}
+
+body {
+  background-color: var(--color-incognito-bg);
+  color: var(--color-incognito-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-incognito-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-incognito-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-incognito-text-muted);
+}
