@@ -3,30 +3,27 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
-import { DatabaseProvider } from './context/DatabaseContext';
+import { DbProvider } from './context/DatabaseContext';
 import { AuthProvider } from './context/AuthContext';
 
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false, error: null, info: null };
+class Eb extends React.Component {
+  constructor(p) {
+    super(p);
+    this.state = { err: false, erMsg: null, inf: null };
   }
-  static getDerivedStateFromError(error) {
-    return { hasError: true, error };
+  static getDerivedStateFromError(e) {
+    return { err: true, erMsg: e };
   }
-  componentDidCatch(error, info) {
-    this.setState({ info });
-    console.error("ErrorBoundary caught an error", error, info);
+  componentDidCatch(e, i) {
+    this.setState({ inf: i });
   }
   render() {
-    if (this.state.hasError) {
+    if (this.state.err) {
       return (
-        <div style={{ padding: '2rem', background: '#202124', color: '#f87171', minHeight: '100vh', fontFamily: 'sans-serif' }}>
-          <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Случилась ошибка рендеринга:</h1>
-          <pre style={{ background: '#323639', padding: '1rem', borderRadius: '0.5rem', overflowX: 'auto', color: '#f1f3f4' }}>
-            {this.state.error && this.state.error.toString()}
-            {'\n'}
-            {this.state.info && this.state.info.componentStack}
+        <div style={{ padding: '2rem', background: '#202124', color: '#f87171', minHeight: '100vh' }}>
+          <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>ошибка:</h1>
+          <pre style={{ background: '#323639', padding: '1rem', borderRadius: '0.5rem', color: '#f1f3f4' }}>
+            {this.state.erMsg && this.state.erMsg.toString()}
           </pre>
         </div>
       );
@@ -36,13 +33,13 @@ class ErrorBoundary extends React.Component {
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <ErrorBoundary>
+  <Eb>
     <BrowserRouter>
-      <DatabaseProvider>
+      <DbProvider>
         <AuthProvider>
           <App/>
         </AuthProvider>
-      </DatabaseProvider>
+      </DbProvider>
     </BrowserRouter>
-  </ErrorBoundary>
+  </Eb>
 );

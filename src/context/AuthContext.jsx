@@ -1,44 +1,44 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { useDatabase } from './DatabaseContext';
+import { useDb } from './DatabaseContext';
 
-const AuthContext = createContext();
+const AContext = createContext();
 
 export function useAuth() {
-  return useContext(AuthContext);
+  return useContext(AContext);
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const { users } = useDatabase();
+  const [tekUsr, setTekUsr] = useState(null);
+  const [zagr, setZagr] = useState(true);
+  const { users } = useDb();
 
   useEffect(() => {
-    const savedUserId = localStorage.getItem('bitrix_session');
-    if (savedUserId && users.length > 0) {
-      const user = users.find(u => u.id === savedUserId);
-      if (user) setCurrentUser(user);
+    const s = localStorage.getItem('bx_session');
+    if (s && users.length > 0) {
+      const u = users.find(x => x.id === s);
+      if (u) setTekUsr(u);
     }
-    setLoading(false);
+    setZagr(false);
   }, [users]);
 
-  const login = (username, password) => {
-    const user = users.find(u => u.username === username && u.password === password);
-    if (user) {
-      setCurrentUser(user);
-      localStorage.setItem('bitrix_session', user.id);
+  const login = (un, pw) => {
+    const u = users.find(x => x.username === un && x.password === pw);
+    if (u) {
+      setTekUsr(u);
+      localStorage.setItem('bx_session', u.id);
       return true;
     }
     return false;
   };
 
   const logout = () => {
-    setCurrentUser(null);
-    localStorage.removeItem('bitrix_session');
+    setTekUsr(null);
+    localStorage.removeItem('bx_session');
   };
 
   return (
-    <AuthContext.Provider value={{ currentUser, login, logout, loading }}>
-      {!loading && children}
-    </AuthContext.Provider>
+    <AContext.Provider value={{ currentUser: tekUsr, login, logout, loading: zagr }}>
+      {!zagr && children}
+    </AContext.Provider>
   );
 }

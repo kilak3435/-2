@@ -6,10 +6,10 @@ import Dashboard from './pages/Dashboard';
 import AdminTasks from './pages/AdminTasks';
 import AdminUsers from './pages/AdminUsers';
 
-function ProtectedRoute({ children, requireAdmin }) {
+function Prot({ children, rAd }) {
   const { currentUser } = useAuth();
   if (!currentUser) return <Navigate to="/login" replace />;
-  if (requireAdmin && currentUser.role !== 'admin') return <Navigate to="/" replace />;
+  if (rAd && currentUser.role !== 'admin') return <Navigate to="/" replace />;
   return children;
 }
 
@@ -21,20 +21,20 @@ export default function App() {
       <Route path="/login" element={currentUser ? <Navigate to="/" replace /> : <Login />} />
       
       <Route path="/" element={
-        <ProtectedRoute>
+        <Prot>
           <MainLayout />
-        </ProtectedRoute>
+        </Prot>
       }>
         <Route index element={<Dashboard />} />
         <Route path="admin/tasks" element={
-          <ProtectedRoute requireAdmin>
+          <Prot rAd>
             <AdminTasks />
-          </ProtectedRoute>
+          </Prot>
         } />
         <Route path="admin/users" element={
-          <ProtectedRoute requireAdmin>
+          <Prot rAd>
             <AdminUsers />
-          </ProtectedRoute>
+          </Prot>
         } />
       </Route>
     </Routes>
