@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes,Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import MainLayout from './layouts/MainLayout';
 import Login from './pages/Login';
@@ -6,14 +6,14 @@ import Dashboard from './pages/Dashboard';
 import AdminTasks from './pages/AdminTasks';
 import AdminUsers from './pages/AdminUsers';
 
-function Prot({ children, rAd }) {
-  const { currentUser } = useAuth();
+function Prot({ children, rAd }){
+  const { currentUser}= useAuth();
   if (!currentUser) return <Navigate to="/login" replace />;
   if (rAd && currentUser.role !== 'admin') return <Navigate to="/" replace />;
   return children;
 }
 
-export default function App() {
+export default function App(){
   const { currentUser } = useAuth();
 
   return (
@@ -35,7 +35,7 @@ export default function App() {
           <Prot rAd>
             <AdminUsers />
           </Prot>
-        } />
+       }/>
       </Route>
     </Routes>
   );

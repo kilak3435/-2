@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Lock } from 'lucide-react';
+import{Lock } from 'lucide-react';
 
 export default function Login() {
-  const [log, setLog] = useState('');
-  const [pass, setPass] = useState('');
+  const [log, setLog]=useState('');
+  const [pass,setPass]=useState('');
   const [err, setErr] = useState('');
-  const { login } = useAuth();
+  const { login }=useAuth();
 
   const otpravit = (e) => {
     e.preventDefault();
@@ -39,7 +39,7 @@ export default function Login() {
             <input
               type="text"
               value={log}
-              onChange={e => setLog(e.target.value)}
+              onChange={e=>setLog(e.target.value)}
               className="w-full bg-[var(--color-incognito-bg)] border border-[var(--color-incognito-border)] rounded px-3 py-2 text-white focus:outline-none focus:border-[var(--color-incognito-accent)] transition-colors"
               required
             />

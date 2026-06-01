@@ -1,11 +1,11 @@
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet,NavLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LayoutDashboard, Users, CheckSquare, LogOut } from 'lucide-react';
+import { LayoutDashboard, Users,CheckSquare, LogOut}from 'lucide-react';
 
 export default function MainLayout() {
-  const { currentUser, logout } = useAuth();
+  const { currentUser,logout } = useAuth();
 
-  const c = ({ isActive }) => 
+  const c=({ isActive }) => 
     `flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${isActive ? 'bg-[var(--color-incognito-surface-hover)] text-white' : 'text-[var(--color-incognito-text-muted)] hover:bg-[var(--color-incognito-surface)] hover:text-white'}`;
 
   return (
